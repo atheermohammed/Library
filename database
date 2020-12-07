@@ -1,0 +1,58 @@
+mysql> use libary;
+Database changed
+mysql> create table auther (
+    -> autherid int(6),
+    -> autherFname varchar(10),
+    -> autherSname (10),
+    -> autherSname varchar(10),
+    -> PRIMARY KEY (autherid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(10),
+autherSname varchar(10),
+PRIMARY KEY (autherid))' at line 4
+mysql> create table auther(
+    -> autherid int(6),
+    -> autherFname varchar(10),
+    -> autherSname varchar(10),
+    -> PRIMARY KEY (autherid));
+Query OK, 0 rows affected (0.59 sec)
+
+mysql> create table user(
+    -> USID INT(6),
+    -> Username INT(6),
+    -> password varchar(40),
+    -> PRIMARY KEY (USID));
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> create table book(
+    -> bookid int(6),
+    -> BookName varchar(25),
+    -> bookdescription varchar(100),
+    -> eddition int(2),
+    -> autherid int(6),
+    -> FOREIGN KEY (autherid)REFERENCES auther(autherid),
+    -> PRIMARY KEY (bookid));
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> create table borrower(
+    -> ID INT(6),
+    -> fname varchar(15),
+    -> lname varchar(15),
+    -> address varchar(25),
+    -> mobie varchar(15),
+    -> email varchar(20),
+    -> PRIMARY KEY(ID));
+Query OK, 0 rows affected (0.42 sec)
+
+mysql> create table borrowbook(
+    -> id int(6),
+    -> borrowerId int(6),
+    -> bookid int(6),
+    -> bdate date,
+    -> enddate date,
+    -> userid int(6),
+    -> status bit,
+    -> PRIMARY KEY(ID),
+    -> FOREIGN KEY (borrowerId) REFERENCES borrower(ID),
+    -> FOREIGN KEY (bookid) REFERENCES book(bookid),
+    -> FOREIGN KEY (userid) REFERENCES user(USID));
+Query OK, 0 rows affected (0.45 sec)
